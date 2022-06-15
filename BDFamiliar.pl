@@ -4,16 +4,22 @@ familia(
         fecha(7,mayo,1960),
         trabajo(profesor,60)
     ),
-    persona([ana,lopez,ruiz],
-            fecha(10,marzo,1962),
-            trabajo(medica,90)),
+    persona(
+        [ana,lopez,ruiz],
+        fecha(10,marzo,1962),
+        trabajo(medica,90)
+    ),
     [
-        persona([juan,garcia,lopez],
-                fecha(5,enero,1990),
-                estudiante),
-        persona([maria,garcia,lopez],
-                fecha(12,abril,1992),
-                estudiante)
+        persona(
+            [juan,garcia,lopez],
+            fecha(5,enero,1990),
+            estudiante
+        ),
+        persona(
+            [maria,garcia,lopez],
+            fecha(12,abril,1992),
+            estudiante
+        )
     ]
 ).
 
@@ -46,3 +52,20 @@ familia(
         )
     ]
 ).
+
+casado(X) :-
+    familia(X,_,_).
+
+casada(X) :-
+    familia(_,X,_).
+
+hijo(X) :-
+    familia(_,_,L),
+    member(X,L).
+
+persona(X) :-
+    casado(X),
+    casada(X),
+    hijo(X).
+
+fecha_de_nacimiento(persona(_,Y,_),Y).
