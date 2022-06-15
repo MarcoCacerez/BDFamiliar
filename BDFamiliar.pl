@@ -69,3 +69,12 @@ persona(X) :-
     hijo(X).
 
 fecha_de_nacimiento(persona(_,Y,_),Y).
+
+sueldo(persona(_,_,trabajo(_,Y)),Y).
+sueldo(persona(_,_,estudiante),0).
+
+total([],0).
+total([X|L],Y) :-
+    sueldo(X,Y1),
+    total(L,Y2),
+    Y is Y1 + Y2.
